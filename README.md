@@ -368,11 +368,11 @@ add repository-specific jobs without forking the shared preset.
 ## Releases and CI
 
 Every user-visible pull request should run `pnpm changeset`, select patch/minor/major, and commit the
-generated Markdown file. CI runs formatting, linting, package type-checking, and a packed-tarball audit
-with Publint and Are the Types Wrong. Executable and JSON exports are checked for ESM and declaration
+generated Markdown file. Before publishing, the release command runs formatting, linting, package
+type-checking, and the build. Maintainers can run `pnpm pack:check` for a packed-tarball audit with
+Publint and Are the Types Wrong. Executable and JSON exports are checked for ESM and declaration
 resolution; Lefthook's YAML assets are excluded from the TypeScript-specific audit and validated with
-Lefthook itself.
-On `main`, Changesets maintains a release PR. Merging it publishes to npm with
+Lefthook itself. On `main`, Changesets maintains a release PR. Merging it publishes to npm with
 provenance and creates the GitHub release.
 
 Repository setup:
@@ -381,7 +381,7 @@ Repository setup:
    `klarity` and **bypass 2FA** enabled. The release job follows the Changesets token-authentication
    pattern and supplies it as `NPM_TOKEN`.
 2. Allow GitHub Actions to create pull requests in repository Actions settings.
-3. Protect `main` and require the CI check.
+3. Protect `main` according to the repository's review policy.
 4. Ensure the npm scope/package is public and that the first publish is authorized.
 
 Commands for maintainers:
