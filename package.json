@@ -14,15 +14,15 @@
     "typescript",
     "vitest"
   ],
-  "homepage": "https://github.com/Envoy-vc/klarity#readme",
+  "homepage": "https://github.com/envoy1084/klarity#readme",
   "bugs": {
-    "url": "https://github.com/Envoy-vc/klarity/issues"
+    "url": "https://github.com/envoy1084/klarity/issues"
   },
   "license": "MIT",
   "author": "envoy1084",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Envoy-vc/klarity.git"
+    "url": "git+https://github.com/envoy1084/klarity.git"
   },
   "files": [
     "dist",
