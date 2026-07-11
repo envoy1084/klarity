@@ -5,7 +5,7 @@ const shared = {
   failOnWarn: true,
   fixedExtension: false,
   minify: false,
-  outDir: "dist",
+  outDir: 'dist',
   publint: true,
   report: false,
   shims: true,
@@ -15,17 +15,17 @@ const shared = {
 
 /** @param {import('tsdown').UserConfig} [overrides] */
 export function defineLibraryConfig(overrides = {}) {
-  return { ...shared, entry: ["src/index.ts"], format: ["esm"], platform: "neutral", ...overrides };
+  return { ...shared, entry: ['src/index.ts'], format: ['esm'], platform: 'neutral', ...overrides };
 }
 
 /** @param {import('tsdown').UserConfig} [overrides] */
 export function defineNodeConfig(overrides = {}) {
   return {
     ...shared,
-    entry: ["src/index.ts"],
-    format: ["esm"],
-    platform: "node",
-    target: "node20",
+    entry: ['src/index.ts'],
+    format: ['esm'],
+    platform: 'node',
+    target: 'node20',
     ...overrides,
   };
 }
@@ -34,10 +34,10 @@ export function defineNodeConfig(overrides = {}) {
 export function defineBrowserConfig(overrides = {}) {
   return {
     ...shared,
-    entry: ["src/index.ts"],
-    format: ["esm"],
-    platform: "browser",
-    target: "es2022",
+    entry: ['src/index.ts'],
+    format: ['esm'],
+    platform: 'browser',
+    target: 'es2022',
     ...overrides,
   };
 }
@@ -45,7 +45,7 @@ export function defineBrowserConfig(overrides = {}) {
 /** @param {import('tsdown').UserConfig} [overrides] */
 export function defineReactConfig(overrides = {}) {
   return defineBrowserConfig({
-    external: ["react", "react-dom", "react/jsx-runtime"],
+    deps: { neverBundle: ['react', 'react-dom', 'react/jsx-runtime'] },
     ...overrides,
   });
 }

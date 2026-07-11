@@ -1,1 +1,1 @@
-export { defineLibraryConfig as default } from "./index.js";
+export { defineLibraryConfig as default } from './index.js';

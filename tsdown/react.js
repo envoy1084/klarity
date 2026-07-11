@@ -1,1 +1,1 @@
-export { defineReactConfig as default } from "./index.js";
+export { defineReactConfig as default } from './index.js';
