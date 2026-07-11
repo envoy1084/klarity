@@ -14,15 +14,15 @@
     "typescript",
     "vitest"
   ],
-  "homepage": "https://github.com/envoy1084/config#readme",
+  "homepage": "https://github.com/Envoy-vc/klarity#readme",
   "bugs": {
-    "url": "https://github.com/envoy1084/config/issues"
+    "url": "https://github.com/Envoy-vc/klarity/issues"
   },
   "license": "MIT",
   "author": "envoy1084",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/envoy1084/config.git"
+    "url": "git+https://github.com/Envoy-vc/klarity.git"
   },
   "files": [
     "dist",
@@ -127,7 +127,7 @@
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "lint": "oxlint --deny-warnings .",
-    "pack:check": "pnpm pack --pack-destination .tmp",
+    "pack:check": "rm -rf .tmp && mkdir -p .tmp && pnpm pack --pack-destination .tmp && publint && attw .tmp/klarity-0.0.0.tgz --profile esm-only --exclude-entrypoints ./lefthook ./lefthook/monorepo",
     "prepack": "pnpm build",
     "release": "pnpm check && changeset publish",
     "typecheck": "tsc -p tsconfig.json --noEmit",

@@ -298,13 +298,13 @@ Turbo does not load npm-exported JavaScript configuration and only supports repo
 
 ```sh
 # Mixed applications and packages
-cp "$(node -p "require.resolve('klarity/turbo')")" turbo.json
+cp "$(node -p 'require.resolve("klarity/turbo")')" turbo.json
 
 # A monorepo containing Next.js applications
-cp "$(node -p "require.resolve('klarity/turbo/next')")" turbo.json
+cp "$(node -p 'require.resolve("klarity/turbo/next")')" turbo.json
 
 # A publishable-library monorepo
-cp "$(node -p "require.resolve('klarity/turbo/library')")" turbo.json
+cp "$(node -p 'require.resolve("klarity/turbo/library")')" turbo.json
 ```
 
 The presets provide production caching behavior for `build`, `lint`, `typecheck`, `test`, `dev`,
@@ -368,7 +368,10 @@ add repository-specific jobs without forking the shared preset.
 ## Releases and CI
 
 Every user-visible pull request should run `pnpm changeset`, select patch/minor/major, and commit the
-generated Markdown file. CI runs formatting, linting, package type-checking, and a package pack check.
+generated Markdown file. CI runs formatting, linting, package type-checking, and a packed-tarball audit
+with Publint and Are the Types Wrong. Executable and JSON exports are checked for ESM and declaration
+resolution; Lefthook's YAML assets are excluded from the TypeScript-specific audit and validated with
+Lefthook itself.
 On `main`, Changesets maintains a release PR. Merging it publishes to npm with
 provenance and creates the GitHub release.
 

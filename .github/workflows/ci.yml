@@ -28,4 +28,5 @@ jobs:
           registry-url: https://registry.npmjs.org
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
+      - run: pnpm exec lefthook validate
       - run: pnpm pack:check
