@@ -24,6 +24,7 @@ const config = defineConfig({
     "no-else-return": "error",
     "no-eval": "error",
     "no-implicit-coercion": "error",
+    "import/no-unassigned-import": "off",
     "no-new-wrappers": "error",
     "no-param-reassign": "error",
     "no-template-curly-in-string": "error",

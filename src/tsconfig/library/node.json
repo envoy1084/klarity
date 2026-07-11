@@ -3,6 +3,7 @@
   "display": "Node.js library",
   "extends": "../base.json",
   "compilerOptions": {
+    "allowImportingTsExtensions": true,
     "declaration": true,
     "declarationMap": true,
     "lib": ["ES2023"],

@@ -6,7 +6,6 @@ const config = defineConfig({
   extends: [base],
   plugins: ["react", "react-perf", "jsx-a11y"],
   env: { browser: true, builtin: true, es2024: true },
-  settings: { react: { version: "detect" } },
   rules: {
     "jsx-a11y/alt-text": "error",
     "jsx-a11y/anchor-has-content": "error",
@@ -18,6 +17,7 @@ const config = defineConfig({
     "react/no-danger": "warn",
     "react/no-direct-mutation-state": "error",
     "react/no-unknown-property": "error",
+    "react/react-in-jsx-scope": "off",
     "react/rules-of-hooks": "error",
     "react-perf/jsx-no-new-array-as-prop": "warn",
     "react-perf/jsx-no-new-function-as-prop": "warn",

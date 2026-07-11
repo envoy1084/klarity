@@ -22,6 +22,7 @@
     "url": "git+https://github.com/envoy1084/config.git"
   },
   "files": [
+    "dist",
     "src",
     "README.md",
     "LICENSE"
@@ -42,31 +43,72 @@
     "./tsconfig/library/node": "./src/tsconfig/library/node.json",
     "./tsconfig/library/react": "./src/tsconfig/library/react.json",
     "./tsconfig/test": "./src/tsconfig/test.json",
-    "./oxlint": "./src/oxlint/base.ts",
-    "./oxlint/node": "./src/oxlint/node.ts",
-    "./oxlint/react": "./src/oxlint/react.ts",
-    "./oxlint/next": "./src/oxlint/next.ts",
-    "./oxfmt": "./src/oxfmt/base.ts",
-    "./oxfmt/compact": "./src/oxfmt/compact.ts",
-    "./tsdown": "./src/tsdown/index.ts",
-    "./tsdown/library": "./src/tsdown/library.ts",
-    "./tsdown/node": "./src/tsdown/node.ts",
-    "./tsdown/browser": "./src/tsdown/browser.ts",
-    "./tsdown/react": "./src/tsdown/react.ts",
-    "./commitlint": "./src/commitlint/index.ts",
-    "./commitlint/types": "./src/commitlint/types.ts"
+    "./oxlint": {
+      "types": "./dist/oxlint/base.d.ts",
+      "default": "./dist/oxlint/base.js"
+    },
+    "./oxlint/node": {
+      "types": "./dist/oxlint/node.d.ts",
+      "default": "./dist/oxlint/node.js"
+    },
+    "./oxlint/react": {
+      "types": "./dist/oxlint/react.d.ts",
+      "default": "./dist/oxlint/react.js"
+    },
+    "./oxlint/next": {
+      "types": "./dist/oxlint/next.d.ts",
+      "default": "./dist/oxlint/next.js"
+    },
+    "./oxfmt": {
+      "types": "./dist/oxfmt/base.d.ts",
+      "default": "./dist/oxfmt/base.js"
+    },
+    "./oxfmt/compact": {
+      "types": "./dist/oxfmt/compact.d.ts",
+      "default": "./dist/oxfmt/compact.js"
+    },
+    "./tsdown": {
+      "types": "./dist/tsdown/index.d.ts",
+      "default": "./dist/tsdown/index.js"
+    },
+    "./tsdown/library": {
+      "types": "./dist/tsdown/library.d.ts",
+      "default": "./dist/tsdown/library.js"
+    },
+    "./tsdown/node": {
+      "types": "./dist/tsdown/node.d.ts",
+      "default": "./dist/tsdown/node.js"
+    },
+    "./tsdown/browser": {
+      "types": "./dist/tsdown/browser.d.ts",
+      "default": "./dist/tsdown/browser.js"
+    },
+    "./tsdown/react": {
+      "types": "./dist/tsdown/react.d.ts",
+      "default": "./dist/tsdown/react.js"
+    },
+    "./commitlint": {
+      "types": "./dist/commitlint/index.d.ts",
+      "default": "./dist/commitlint/index.js"
+    },
+    "./commitlint/types": {
+      "types": "./dist/commitlint/types.d.ts",
+      "default": "./dist/commitlint/types.js"
+    }
   },
   "publishConfig": {
     "access": "public",
     "provenance": true
   },
   "scripts": {
+    "build": "tsc -p tsconfig.build.json",
     "changeset": "changeset",
-    "check": "pnpm format:check && pnpm lint && pnpm typecheck",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "lint": "oxlint --deny-warnings .",
     "pack:check": "pnpm pack --pack-destination .tmp",
+    "prepack": "pnpm build",
     "release": "pnpm check && changeset publish",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "version": "changeset version"
@@ -90,6 +132,7 @@
     "@commitlint/config-conventional": ">=19 <22",
     "oxfmt": ">=0.20 <1",
     "oxlint": ">=1 <2",
+    "publint": ">=0.3 <1",
     "tsdown": ">=0.15 <1",
     "typescript": ">=5.7 <8"
   },
@@ -104,6 +147,9 @@
       "optional": true
     },
     "oxlint": {
+      "optional": true
+    },
+    "publint": {
       "optional": true
     },
     "tsdown": {

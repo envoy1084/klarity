@@ -44,6 +44,7 @@ export function defineBrowserConfig(overrides: UserConfig = {}): UserConfig {
 export function defineReactConfig(overrides: UserConfig = {}): UserConfig {
   return defineBrowserConfig({
     deps: { neverBundle: ["react", "react-dom", "react/jsx-runtime"] },
+    entry: ["src/index.tsx"],
     ...overrides,
   });
 }

@@ -5,9 +5,7 @@
   "compilerOptions": {
     "allowJs": true,
     "incremental": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "plugins": [{ "name": "next" }]
-  },
-  "include": ["next-env.d.ts", ".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "**/*.mts"],
-  "exclude": ["node_modules"]
+  }
 }
