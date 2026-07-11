@@ -1,0 +1,6 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Browser library",
+  "extends": "./library.json",
+  "compilerOptions": { "lib": ["ES2022", "DOM", "DOM.Iterable"] }
+}

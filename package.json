@@ -1,0 +1,114 @@
+{
+  "name": "@envoy1084/config",
+  "version": "0.0.0",
+  "description": "Production-grade shared TypeScript, Oxlint, Oxfmt, tsdown, Commitlint, and tooling presets.",
+  "keywords": [
+    "commitlint",
+    "config",
+    "oxfmt",
+    "oxlint",
+    "tsconfig",
+    "tsdown",
+    "typescript"
+  ],
+  "homepage": "https://github.com/envoy1084/config#readme",
+  "bugs": {
+    "url": "https://github.com/envoy1084/config/issues"
+  },
+  "license": "MIT",
+  "author": "envoy1084",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/envoy1084/config.git"
+  },
+  "files": [
+    "commitlint",
+    "oxfmt",
+    "oxlint",
+    "tsconfig",
+    "tsdown",
+    "README.md",
+    "LICENSE"
+  ],
+  "type": "module",
+  "sideEffects": false,
+  "exports": {
+    "./package.json": "./package.json",
+    "./tsconfig/*": "./tsconfig/*.json",
+    "./oxlint": "./oxlint/base.js",
+    "./oxlint/*": "./oxlint/*.js",
+    "./oxfmt": "./oxfmt/base.js",
+    "./oxfmt/*": "./oxfmt/*.js",
+    "./tsdown": "./tsdown/index.js",
+    "./tsdown/*": "./tsdown/*.js",
+    "./commitlint": "./commitlint/index.js"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "changeset": "changeset",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm test",
+    "format": "oxfmt --write .",
+    "format:check": "oxfmt --check .",
+    "lint": "oxlint --deny-warnings .",
+    "pack:check": "pnpm pack --pack-destination .tmp",
+    "release": "pnpm check && changeset publish",
+    "test": "node test/validate.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "version": "changeset version"
+  },
+  "devDependencies": {
+    "@arethetypeswrong/cli": "^0.18.5",
+    "@changesets/cli": "^2.31.0",
+    "@commitlint/cli": "^21.2.1",
+    "@commitlint/config-conventional": "^21.2.0",
+    "@commitlint/types": "^21.2.0",
+    "@types/node": "^24.0.0",
+    "oxfmt": "^0.58.0",
+    "oxlint": "^1.73.0",
+    "publint": "^0.3.21",
+    "tsdown": "^0.22.4",
+    "typescript": "^7.0.2"
+  },
+  "peerDependencies": {
+    "@commitlint/cli": ">=19 <22",
+    "@commitlint/config-conventional": ">=19 <22",
+    "oxfmt": ">=0.20 <1",
+    "oxlint": ">=1 <2",
+    "tsdown": ">=0.15 <1",
+    "typescript": ">=5.7 <8"
+  },
+  "peerDependenciesMeta": {
+    "@commitlint/cli": {
+      "optional": true
+    },
+    "@commitlint/config-conventional": {
+      "optional": true
+    },
+    "oxfmt": {
+      "optional": true
+    },
+    "oxlint": {
+      "optional": true
+    },
+    "tsdown": {
+      "optional": true
+    },
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devEngines": {
+    "packageManager": {
+      "name": "pnpm",
+      "version": "11.11.0",
+      "onFail": "download"
+    }
+  },
+  "engines": {
+    "node": ">=22.18"
+  },
+  "packageManager": "pnpm@11.11.0"
+}

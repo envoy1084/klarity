@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig/node.json",
+  "compilerOptions": { "allowJs": true, "checkJs": true },
+  "include": [
+    "commitlint/**/*.js",
+    "oxfmt/**/*.js",
+    "oxlint/**/*.js",
+    "tsdown/**/*.js",
+    "test/**/*.mjs"
+  ]
+}

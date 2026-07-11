@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "React Native application",
+  "extends": "./app.json",
+  "compilerOptions": {
+    "allowImportingTsExtensions": true,
+    "jsx": "react-jsx",
+    "lib": ["ES2022"],
+    "moduleSuffixes": [".ios", ".android", ".native", ""]
+  }
+}
