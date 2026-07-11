@@ -199,13 +199,6 @@
       "optional": true
     }
   },
-  "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "11.11.0",
-      "onFail": "download"
-    }
-  },
   "engines": {
     "node": ">=22.18"
   },
