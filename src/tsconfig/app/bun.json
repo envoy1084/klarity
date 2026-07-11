@@ -1,15 +1,15 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
-  "display": "Vite application",
-  "extends": "./app.json",
+  "display": "Bun application",
+  "extends": "../base.json",
   "compilerOptions": {
     "allowImportingTsExtensions": true,
     "jsx": "react-jsx",
-    "lib": ["ES2023", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "lib": ["ESNext"],
+    "module": "Preserve",
     "moduleResolution": "Bundler",
     "noEmit": true,
-    "target": "ES2022",
-    "types": ["vite/client"]
+    "target": "ESNext",
+    "types": ["bun"]
   }
 }

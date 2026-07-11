@@ -1,7 +1,7 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "Next.js application",
-  "extends": "./app.json",
+  "extends": "./base.json",
   "compilerOptions": {
     "allowJs": true,
     "incremental": true,

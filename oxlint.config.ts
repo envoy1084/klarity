@@ -1,1 +1,1 @@
-export { default } from './oxlint/node.js';
+export { default } from "./src/oxlint/node.ts";

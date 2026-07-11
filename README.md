@@ -71,12 +71,12 @@ pnpm add -D oxlint
 ```
 
 ```ts
-import config from '@envoy1084/config/oxlint/react';
-import { defineConfig } from 'oxlint';
+import config from "@envoy1084/config/oxlint/react";
+import { defineConfig } from "oxlint";
 
 export default defineConfig({
   extends: [config],
-  rules: { 'no-console': 'error' },
+  rules: { "no-console": "error" },
 });
 ```
 
@@ -106,7 +106,7 @@ while adopting a preset. Enable Oxlint's type-aware mode locally only after meas
 Install `oxfmt` and create `oxfmt.config.ts`:
 
 ```js
-export { default } from '@envoy1084/config/oxfmt';
+export { default } from "@envoy1084/config/oxfmt";
 ```
 
 The default is 100 columns, 2 spaces, LF, semicolons, single quotes in JS/TS, trailing commas, sorted
@@ -115,7 +115,7 @@ Because Oxfmt uses the nearest config and does not support shared-package import
 the JavaScript bridge is required. Extend normally when necessary:
 
 ```js
-import base from '@envoy1084/config/oxfmt';
+import base from "@envoy1084/config/oxfmt";
 export default { ...base, printWidth: 120 };
 ```
 
@@ -127,10 +127,10 @@ coverage, framework caches, and the pnpm lockfile are ignored.
 Install `tsdown`, select the runtime, and keep package-specific facts beside the package:
 
 ```ts
-import defineConfig from '@envoy1084/config/tsdown/react';
+import defineConfig from "@envoy1084/config/tsdown/react";
 
 export default defineConfig({
-  entry: { index: 'src/index.ts', button: 'src/button.tsx' },
+  entry: { index: "src/index.ts", button: "src/button.tsx" },
 });
 ```
 
@@ -153,7 +153,7 @@ output increases conditional-export and module-state risk and is not the default
 Install the two Commitlint peers and create `commitlint.config.js`:
 
 ```js
-export { default } from '@envoy1084/config/commitlint';
+export { default } from "@envoy1084/config/commitlint";
 ```
 
 The preset follows Conventional Commits, uses kebab-case scopes, caps headers/body/footer lines at 100

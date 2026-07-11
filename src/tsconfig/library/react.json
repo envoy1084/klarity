@@ -1,6 +1,6 @@
 {
   "$schema": "https://json.schemastore.org/tsconfig",
   "display": "React component library",
-  "extends": "./library-browser.json",
+  "extends": "./browser.json",
   "compilerOptions": { "jsx": "react-jsx" }
 }
