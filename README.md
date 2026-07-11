@@ -377,9 +377,9 @@ provenance and creates the GitHub release.
 
 Repository setup:
 
-1. On npm, configure `klarity` with a GitHub Actions trusted publisher for repository
-   `envoy1084/klarity` and workflow `release.yml`. Leave the environment name blank. The workflow uses
-   short-lived OIDC credentials and does not require an `NPM_TOKEN` secret.
+1. Add an `NPM_TOKEN` Actions secret using a granular npm access token with read/write access to
+   `klarity` and **bypass 2FA** enabled. The workflow supplies it as both `NPM_TOKEN` for Changesets and
+   `NODE_AUTH_TOKEN` for setup-node's registry configuration.
 2. Allow GitHub Actions to create pull requests in repository Actions settings.
 3. Protect `main` and require the CI check.
 4. Ensure the npm scope/package is public and that the first publish is authorized.
