@@ -1,4 +1,4 @@
-# @envoy1084/config
+# klarity
 
 Production-grade, deliberately opinionated shared configuration for TypeScript projects. The package
 keeps compiler, lint, formatting, library build, and commit conventions aligned across applications,
@@ -11,7 +11,7 @@ packages, and monorepos without hiding the underlying tools.
 - Install only the peer tools you use; all peers are optional so a TSConfig-only consumer stays lean
 
 ```sh
-pnpm add -D @envoy1084/config typescript
+pnpm add -D klarity typescript
 ```
 
 Every authored runtime config lives as TypeScript under `src/`. The package compiles those files to
@@ -25,7 +25,7 @@ Create `tsconfig.json` and select exactly one environment preset:
 
 ```json
 {
-  "extends": "@envoy1084/config/tsconfig/library/node",
+  "extends": "klarity/tsconfig/library/node",
   "include": ["src", "test"]
 }
 ```
@@ -55,7 +55,7 @@ actual emitter. Add tool globals locally rather than making them leak into every
 
 ```json
 {
-  "extends": "@envoy1084/config/tsconfig/test",
+  "extends": "klarity/tsconfig/test",
   "compilerOptions": { "types": ["vitest/globals", "node"] },
   "include": ["**/*.test.ts"]
 }
@@ -69,7 +69,7 @@ otherwise resolve inside this package):
 
 ```json
 {
-  "extends": "@envoy1084/config/tsconfig/app/next",
+  "extends": "klarity/tsconfig/app/next",
   "compilerOptions": { "paths": { "@/*": ["./src/*"] } },
   "include": [
     "next-env.d.ts",
@@ -92,7 +92,7 @@ pnpm add -D oxlint
 ```
 
 ```ts
-import config from "@envoy1084/config/oxlint/react";
+import config from "klarity/oxlint/react";
 import { defineConfig } from "oxlint";
 
 export default defineConfig({
@@ -127,18 +127,18 @@ while adopting a preset. Enable Oxlint's type-aware mode locally only after meas
 Install `oxfmt` and create `oxfmt.config.ts`:
 
 ```js
-export { default } from "@envoy1084/config/oxfmt";
+export { default } from "klarity/oxfmt";
 ```
 
 The default is 100 columns, 2 spaces, LF, semicolons, **double quotes everywhere**, trailing commas,
 sorted imports, and sorted `package.json`. Imports are grouped in this order: Node built-ins, React,
 Next.js, TanStack, Effect (`effect` and `@effect/*`), other packages, internal aliases, relative files,
-styles, and type imports. Use `@envoy1084/config/oxfmt/compact` for an 80-column house style. Because
+styles, and type imports. Use `klarity/oxfmt/compact` for an 80-column house style. Because
 Oxfmt uses the nearest config and does not support shared-package imports from JSON config, the
 TypeScript bridge is required. Extend normally when necessary:
 
 ```js
-import base from "@envoy1084/config/oxfmt";
+import base from "klarity/oxfmt";
 export default { ...base, printWidth: 120 };
 ```
 
@@ -154,7 +154,7 @@ pnpm add -D tsdown publint
 ```
 
 ```ts
-import defineConfig from "@envoy1084/config/tsdown/react";
+import defineConfig from "klarity/tsdown/react";
 
 export default defineConfig({
   entry: { index: "src/index.ts", button: "src/button.tsx" },
@@ -184,7 +184,7 @@ pnpm add -D @commitlint/cli @commitlint/config-conventional
 ```
 
 ```ts
-export { default } from "@envoy1084/config/commitlint";
+export { default } from "klarity/commitlint";
 ```
 
 The preset follows Conventional Commits, uses kebab-case scopes, caps headers/body/footer lines at 100
@@ -209,7 +209,7 @@ The optional `(scope)` segment accepts any kebab-case value by default. To restr
 types, or override individual rules, use the typed factory:
 
 ```ts
-import { defineCommitlintConfig } from "@envoy1084/config/commitlint";
+import { defineCommitlintConfig } from "klarity/commitlint";
 
 export default defineCommitlintConfig({
   types: ["deps", "release"],
@@ -221,7 +221,149 @@ export default defineCommitlintConfig({
 ```
 
 `types` are appended to the standard set rather than replacing it. Import `conventionalTypes` or the
-`ConventionalType` type from `@envoy1084/config/commitlint/types` when building other commit tooling.
+`ConventionalType` type from `klarity/commitlint/types` when building other commit tooling.
+
+## Vitest
+
+Install Vitest and the V8 coverage provider:
+
+```sh
+pnpm add -D vitest @vitest/coverage-v8
+```
+
+For a general TypeScript project, create `vitest.config.ts`:
+
+```ts
+export { default } from "klarity/vitest";
+```
+
+The base preset uses explicit Vitest imports instead of globals, restores mocks and environment/global
+stubs between tests, rejects `.only`, applies ten-second test and hook timeouts, and excludes generated
+framework/build directories. Coverage is opt-in and uses V8 with text, JSON, HTML, and LCOV reports.
+When enabled, it includes all source files and enforces 80% branches, functions, lines, and statements.
+
+Use the Node factory when you need project-specific overrides:
+
+```ts
+import defineConfig from "klarity/vitest/node";
+
+export default defineConfig({
+  test: {
+    setupFiles: ["./test/setup.ts"],
+  },
+});
+```
+
+For React component tests, install `jsdom` and use the React factory:
+
+```sh
+pnpm add -D jsdom @testing-library/react
+```
+
+```ts
+import defineConfig from "klarity/vitest/react";
+
+export default defineConfig({
+  test: {
+    setupFiles: ["./test/setup.ts"],
+  },
+});
+```
+
+The React preset enables the `jsdom` environment and CSS processing. Suggested scripts:
+
+```json
+{
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  }
+}
+```
+
+Override `test.coverage.thresholds` locally for stricter packages; threshold fields are deeply merged
+with the defaults rather than replacing the entire coverage policy.
+
+## Turborepo
+
+Install Turbo at the workspace root:
+
+```sh
+pnpm add -D turbo
+```
+
+Turbo does not load npm-exported JavaScript configuration and only supports repository-local
+`turbo.json`. Copy the closest schema-validated preset, then customize it in the repository:
+
+```sh
+# Mixed applications and packages
+cp "$(node -p "require.resolve('klarity/turbo')")" turbo.json
+
+# A monorepo containing Next.js applications
+cp "$(node -p "require.resolve('klarity/turbo/next')")" turbo.json
+
+# A publishable-library monorepo
+cp "$(node -p "require.resolve('klarity/turbo/library')")" turbo.json
+```
+
+The presets provide production caching behavior for `build`, `lint`, `typecheck`, `test`, `dev`,
+`test:watch`, and `clean`. Builds run after dependency builds; type-checking follows workspace topology;
+coverage and framework outputs are cached; development/watch processes are persistent and never
+cached. The Next preset excludes `.next/cache` while caching the remaining production output.
+
+Add application-specific environment variables to the relevant task's `env` array. Do not put every
+environment variable in `globalEnv`, because doing so invalidates unrelated workspace caches.
+
+Recommended root scripts:
+
+```json
+{
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "typecheck": "turbo run typecheck"
+  }
+}
+```
+
+## Lefthook
+
+Install the binary and Commitlint peers:
+
+```sh
+pnpm add -D lefthook @commitlint/cli @commitlint/config-conventional
+```
+
+For a single-package repository, create `lefthook.yml`:
+
+```yaml
+extends:
+  - node_modules/klarity/src/lefthook/base.yml
+```
+
+For a Turborepo monorepo:
+
+```yaml
+extends:
+  - node_modules/klarity/src/lefthook/monorepo.yml
+```
+
+Then install the hooks:
+
+```sh
+pnpm exec lefthook install
+```
+
+The pre-commit hook formats staged supported files, stages formatter changes, and runs Oxlint on staged
+JavaScript/TypeScript. The commit-message hook enforces Klarity's Conventional Commit policy. Before a
+push, the single-package preset runs available type-check and test scripts in parallel; the monorepo
+preset runs `lint`, `typecheck`, and `test` through Turbo.
+
+Named Lefthook jobs merge cleanly. Override a job with the same `name` in your local `lefthook.yml`, or
+add repository-specific jobs without forking the shared preset.
 
 ## Releases and CI
 
@@ -232,7 +374,7 @@ provenance and creates the GitHub release.
 
 Repository setup:
 
-1. Add an `NPM_TOKEN` Actions secret with publish access to `@envoy1084/config` (unless your npm trusted
+1. Add an `NPM_TOKEN` Actions secret with publish access to `klarity` (unless your npm trusted
    publishing setup removes the token requirement).
 2. Allow GitHub Actions to create pull requests in repository Actions settings.
 3. Protect `main` and require the CI check.

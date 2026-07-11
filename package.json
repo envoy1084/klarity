@@ -1,15 +1,18 @@
 {
-  "name": "@envoy1084/config",
+  "name": "klarity",
   "version": "0.0.0",
-  "description": "Production-grade shared TypeScript, Oxlint, Oxfmt, tsdown, Commitlint, and tooling presets.",
+  "description": "Production-grade TypeScript, Oxc, Vitest, Turborepo, Lefthook, tsdown, and Commitlint presets.",
   "keywords": [
     "commitlint",
     "config",
+    "lefthook",
     "oxfmt",
     "oxlint",
     "tsconfig",
     "tsdown",
-    "typescript"
+    "turborepo",
+    "typescript",
+    "vitest"
   ],
   "homepage": "https://github.com/envoy1084/config#readme",
   "bugs": {
@@ -94,7 +97,24 @@
     "./commitlint/types": {
       "types": "./dist/commitlint/types.d.ts",
       "default": "./dist/commitlint/types.js"
-    }
+    },
+    "./vitest": {
+      "types": "./dist/vitest/index.d.ts",
+      "default": "./dist/vitest/index.js"
+    },
+    "./vitest/node": {
+      "types": "./dist/vitest/node.d.ts",
+      "default": "./dist/vitest/node.js"
+    },
+    "./vitest/react": {
+      "types": "./dist/vitest/react.d.ts",
+      "default": "./dist/vitest/react.js"
+    },
+    "./turbo": "./src/turbo/base.json",
+    "./turbo/next": "./src/turbo/next.json",
+    "./turbo/library": "./src/turbo/library.json",
+    "./lefthook": "./src/lefthook/base.yml",
+    "./lefthook/monorepo": "./src/lefthook/monorepo.yml"
   },
   "publishConfig": {
     "access": "public",
@@ -121,26 +141,40 @@
     "@commitlint/config-conventional": "^21.2.0",
     "@commitlint/types": "^21.2.0",
     "@types/node": "^24.0.0",
+    "@vitest/coverage-v8": "^4.1.10",
+    "lefthook": "^2.1.10",
     "oxfmt": "^0.58.0",
     "oxlint": "^1.73.0",
     "publint": "^0.3.21",
     "tsdown": "^0.22.4",
-    "typescript": "^7.0.2"
+    "turbo": "^2.10.4",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
   },
   "peerDependencies": {
     "@commitlint/cli": ">=19 <22",
     "@commitlint/config-conventional": ">=19 <22",
+    "@vitest/coverage-v8": ">=4 <5",
+    "lefthook": ">=2 <3",
     "oxfmt": ">=0.20 <1",
     "oxlint": ">=1 <2",
     "publint": ">=0.3 <1",
     "tsdown": ">=0.15 <1",
-    "typescript": ">=5.7 <8"
+    "turbo": ">=2 <3",
+    "typescript": ">=5.7 <8",
+    "vitest": ">=4 <5"
   },
   "peerDependenciesMeta": {
     "@commitlint/cli": {
       "optional": true
     },
     "@commitlint/config-conventional": {
+      "optional": true
+    },
+    "@vitest/coverage-v8": {
+      "optional": true
+    },
+    "lefthook": {
       "optional": true
     },
     "oxfmt": {
@@ -155,7 +189,13 @@
     "tsdown": {
       "optional": true
     },
+    "turbo": {
+      "optional": true
+    },
     "typescript": {
+      "optional": true
+    },
+    "vitest": {
       "optional": true
     }
   },
