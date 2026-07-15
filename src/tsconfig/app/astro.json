@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "display": "Astro application",
+  "extends": "./base.json",
+  "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
+    "jsx": "preserve",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "noEmit": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "target": "ESNext"
+  },
+  "include": ["${configDir}/.astro/types.d.ts", "${configDir}/**/*"],
+  "exclude": ["${configDir}/dist"]
+}

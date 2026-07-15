@@ -1,8 +1,9 @@
 {
   "name": "klarity",
   "version": "0.1.0",
-  "description": "Production-grade TypeScript, Oxc, Vitest, Turborepo, Lefthook, tsdown, and Commitlint presets.",
+  "description": "Production-grade Astro, TypeScript, Oxc, Vitest, Turborepo, Lefthook, tsdown, and Commitlint presets.",
   "keywords": [
+    "astro",
     "commitlint",
     "config",
     "lefthook",
@@ -37,6 +38,7 @@
     "./tsconfig/base": "./src/tsconfig/base.json",
     "./tsconfig/app": "./src/tsconfig/app/base.json",
     "./tsconfig/app/vite": "./src/tsconfig/app/vite.json",
+    "./tsconfig/app/astro": "./src/tsconfig/app/astro.json",
     "./tsconfig/app/next": "./src/tsconfig/app/next.json",
     "./tsconfig/app/node": "./src/tsconfig/app/node.json",
     "./tsconfig/app/bun": "./src/tsconfig/app/bun.json",
@@ -110,6 +112,10 @@
       "types": "./dist/vitest/react.d.ts",
       "default": "./dist/vitest/react.js"
     },
+    "./astro": {
+      "types": "./dist/astro/index.d.ts",
+      "default": "./dist/astro/index.js"
+    },
     "./turbo": "./src/turbo/base.json",
     "./turbo/next": "./src/turbo/next.json",
     "./turbo/library": "./src/turbo/library.json",
@@ -127,7 +133,7 @@
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "lint": "oxlint --deny-warnings .",
-    "pack:check": "rm -rf .tmp && mkdir -p .tmp && pnpm pack --pack-destination .tmp && publint && attw .tmp/klarity-0.0.0.tgz --profile esm-only --exclude-entrypoints ./lefthook ./lefthook/monorepo",
+    "pack:check": "rm -rf .tmp && mkdir -p .tmp && pnpm pack --pack-destination .tmp && publint && attw .tmp/*.tgz --profile esm-only --exclude-entrypoints ./lefthook ./lefthook/monorepo",
     "prepack": "pnpm build",
     "release": "pnpm check && changeset publish",
     "typecheck": "tsc -p tsconfig.json --noEmit",
@@ -142,6 +148,7 @@
     "@commitlint/types": "^21.2.0",
     "@types/node": "^24.0.0",
     "@vitest/coverage-v8": "^4.1.10",
+    "astro": "^7.0.9",
     "lefthook": "^2.1.10",
     "oxfmt": "^0.58.0",
     "oxlint": "^1.73.0",
@@ -155,6 +162,7 @@
     "@commitlint/cli": ">=19 <22",
     "@commitlint/config-conventional": ">=19 <22",
     "@vitest/coverage-v8": ">=4 <5",
+    "astro": ">=7 <8",
     "lefthook": ">=2 <3",
     "oxfmt": ">=0.20 <1",
     "oxlint": ">=1 <2",
@@ -172,6 +180,9 @@
       "optional": true
     },
     "@vitest/coverage-v8": {
+      "optional": true
+    },
+    "astro": {
       "optional": true
     },
     "lefthook": {

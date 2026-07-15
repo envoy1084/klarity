@@ -40,6 +40,7 @@ applications should validate their own boundary, not repeatedly re-check third-p
 | `tsconfig/base`             | Building a custom preset            | Strictness only; deliberately no module, target, or lib           |
 | `tsconfig/app`              | Browser apps built by a bundler     | ESNext + Bundler, DOM, no emit                                    |
 | `tsconfig/app/vite`         | Vite and TanStack Router apps       | App + React JSX, `vite/client`, TS extension imports              |
+| `tsconfig/app/astro`        | Astro 7 sites and applications      | Strictest-style checks, Astro-generated types, preserved JSX      |
 | `tsconfig/app/next`         | Next.js App or Pages Router         | Next plugin, preserved JSX, incremental checking, generated types |
 | `tsconfig/app/node`         | Node services, CLIs, workers        | NodeNext resolution, Node types, no emit                          |
 | `tsconfig/app/bun`          | Bun apps and scripts                | Preserve + Bundler, Bun types, ESNext target                      |
@@ -80,6 +81,60 @@ otherwise resolve inside this package):
     "**/*.mts"
   ],
   "exclude": ["node_modules"]
+}
+```
+
+## Astro
+
+Install Astro 7, Astro's checker, and TypeScript:
+
+```sh
+pnpm add astro
+pnpm add -D @astrojs/check typescript klarity
+```
+
+Use the framework-aware TSConfig. It follows Astro's `strictest` recommendation, includes generated
+`.astro/types.d.ts` and all project files through TypeScript's `${configDir}` substitution, preserves
+JSX for Astro, permits imported JavaScript, and excludes `dist`:
+
+```json
+{
+  "extends": "klarity/tsconfig/app/astro"
+}
+```
+
+Create `astro.config.ts` with the production factory and set the real deployment URL. Astro strongly
+recommends `site` for correct canonical URLs and sitemaps, but Klarity cannot safely guess it:
+
+```ts
+import defineAstroConfig from "klarity/astro";
+
+export default defineAstroConfig({
+  site: "https://example.com",
+});
+```
+
+The preset locks in Astro 7's JSX-aware HTML compression, makes conflicting prerendered routes fail
+the build, retains origin checking for CSRF protection, keeps Astro's 1 MiB action and server-island
+body limits, automatically inlines small stylesheets, and retains the recommended build concurrency
+of one. Nested `build` and `security` overrides merge with these defaults. Deployment-specific facts
+remain local: choose `output`, an adapter, integrations, `base`, trailing-slash behavior, image domains,
+redirects, and Vite settings in the application.
+
+Content Security Policy remains opt-in. Astro documents current CSP limitations for external assets,
+enhanced view transitions, Shiki, and `unsafe-inline`; enable and tailor `security.csp` only after
+auditing the site's actual resource graph. Avoid experimental flags in a shared production baseline.
+
+Use Astro's checker because plain `tsc` does not inspect `.astro` files:
+
+```json
+{
+  "scripts": {
+    "build": "astro check && astro build",
+    "check": "astro check",
+    "dev": "astro dev",
+    "preview": "astro preview"
+  }
 }
 ```
 
