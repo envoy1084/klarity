@@ -1,7 +1,7 @@
 {
   "name": "klarity",
   "version": "0.1.0",
-  "description": "Production-grade Astro, TypeScript, Oxc, Vitest, Turborepo, Lefthook, tsdown, and Commitlint presets.",
+  "description": "Production-grade TypeScript, Oxc, Vitest, Turborepo, Lefthook, tsdown, and Commitlint presets.",
   "keywords": [
     "astro",
     "commitlint",
@@ -112,10 +112,6 @@
       "types": "./dist/vitest/react.d.ts",
       "default": "./dist/vitest/react.js"
     },
-    "./astro": {
-      "types": "./dist/astro/index.d.ts",
-      "default": "./dist/astro/index.js"
-    },
     "./turbo": "./src/turbo/base.json",
     "./turbo/next": "./src/turbo/next.json",
     "./turbo/library": "./src/turbo/library.json",
@@ -127,7 +123,7 @@
     "provenance": true
   },
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "changeset": "changeset",
     "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build",
     "format": "oxfmt --write .",
@@ -148,7 +144,6 @@
     "@commitlint/types": "^21.2.0",
     "@types/node": "^24.0.0",
     "@vitest/coverage-v8": "^4.1.10",
-    "astro": "^7.0.9",
     "lefthook": "^2.1.10",
     "oxfmt": "^0.58.0",
     "oxlint": "^1.73.0",
@@ -162,7 +157,6 @@
     "@commitlint/cli": ">=19 <22",
     "@commitlint/config-conventional": ">=19 <22",
     "@vitest/coverage-v8": ">=4 <5",
-    "astro": ">=7 <8",
     "lefthook": ">=2 <3",
     "oxfmt": ">=0.20 <1",
     "oxlint": ">=1 <2",
@@ -180,9 +174,6 @@
       "optional": true
     },
     "@vitest/coverage-v8": {
-      "optional": true
-    },
-    "astro": {
       "optional": true
     },
     "lefthook": {
