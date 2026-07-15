@@ -1,6 +1,6 @@
 {
   "name": "klarity",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Production-grade TypeScript, Oxc, Vitest, Turborepo, Lefthook, tsdown, and Commitlint presets.",
   "keywords": [
     "astro",
