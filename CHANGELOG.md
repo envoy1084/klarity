@@ -1,5 +1,11 @@
 # klarity
 
+## 0.2.0
+
+### Minor Changes
+
+- [`be226f1`](https://github.com/envoy1084/klarity/commit/be226f16ecfa7346a29bb5051095fa5999a21ba8) Thanks [@envoy1084](https://github.com/envoy1084)! - Add a production-oriented, framework-aware TypeScript preset for Astro applications.
+
 ## 0.1.0
 
 ### Minor Changes
