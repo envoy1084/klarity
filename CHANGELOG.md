@@ -1,5 +1,17 @@
 # klarity
 
+## 0.3.0
+
+### Minor Changes
+
+- [#12](https://github.com/envoy1084/klarity/pull/12) [`40f1814`](https://github.com/envoy1084/klarity/commit/40f18144e0e90eaaf4e267741decbe4b0f9c101c) Thanks [@envoy1084](https://github.com/envoy1084)! - Support TypeScript 7 declaration builds in the tsdown presets by suppressing only
+  the declaration generator's known experimental-API warning. Other build warnings
+  remain fatal, and consumer overrides still take precedence.
+
+  Raise the minimum tsdown peer to 0.23.0 and extend Vitest and V8 coverage peer
+  support to version 5. Add packed-consumer compatibility checks for TypeScript 6/7
+  and Vitest 4/5, including declaration maps and strict warning behavior.
+
 ## 0.2.0
 
 ### Minor Changes
