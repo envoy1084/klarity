@@ -208,6 +208,14 @@ field in the factory argument. Keep React in `peerDependencies`, and review gene
 the first publish. Use a second explicit build configuration if you truly need CommonJS; dual-package
 output increases conditional-export and module-state risk and is not the default.
 
+The tsdown presets require tsdown 0.23.0 or newer. TypeScript 7 declaration generation
+uses the plugin's automatically selected `tsgo` generator. Klarity suppresses only its
+known experimental-API warning; unrelated warnings still fail the build. Setting
+`suppressWarnings` in your overrides replaces this default exception. TypeScript 6
+continues to use the TypeScript API generator. Neither `isolatedDeclarations` nor a
+global generator override is required. Framework-specific integrations that depend
+on the older compiler API need their own compatibility checks.
+
 ## Commitlint
 
 Install the two Commitlint peers and create `commitlint.config.ts`:
@@ -257,6 +265,8 @@ export default defineCommitlintConfig({
 `ConventionalType` type from `klarity/commitlint/types` when building other commit tooling.
 
 ## Vitest
+
+Vitest 4 and 5 are supported. Keep `@vitest/coverage-v8` on the same version as Vitest.
 
 Install Vitest and the V8 coverage provider:
 
@@ -407,6 +417,12 @@ Publint and Are the Types Wrong. Executable and JSON exports are checked for ESM
 resolution; Lefthook's YAML assets are excluded from the TypeScript-specific audit and validated with
 Lefthook itself. On `main`, Changesets maintains a release PR. Merging it publishes to npm with
 provenance and creates the GitHub release.
+
+`pnpm test` installs packed consumers in temporary directories for TypeScript 6.0.3
+with Vitest 4.1.10 and TypeScript 7.0.2 with Vitest 5.0.3. It builds each tsdown preset
+in bundled and unbundled modes, checks declarations and maps, confirms unrelated
+warnings still fail, and runs tests with V8 coverage. It requires registry access
+and removes its temporary consumers afterward. `pnpm check` includes this suite.
 
 Repository setup:
 

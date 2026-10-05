@@ -5,6 +5,10 @@ const shared = {
   dts: { sourcemap: true },
   exports: true,
   failOnWarn: true,
+  // The tested TS7 generator warns on every build; other warnings must still fail.
+  suppressWarnings: [
+    /^TypeScript 7\.0 does not yet have a stable API and is experimental\. Some options will be unavailable\.$/,
+  ],
   fixedExtension: false,
   minify: false,
   outDir: "dist",

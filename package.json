@@ -125,13 +125,14 @@
   "scripts": {
     "build": "rm -rf dist && tsc -p tsconfig.build.json",
     "changeset": "changeset",
-    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build",
+    "check": "pnpm format:check && pnpm lint && pnpm typecheck && pnpm build && pnpm test",
     "format": "oxfmt --write .",
     "format:check": "oxfmt --check .",
     "lint": "oxlint --deny-warnings .",
     "pack:check": "rm -rf .tmp && mkdir -p .tmp && pnpm pack --pack-destination .tmp && publint && attw .tmp/*.tgz --profile esm-only --exclude-entrypoints ./lefthook ./lefthook/monorepo",
     "prepack": "pnpm build",
     "release": "pnpm check && changeset publish",
+    "test": "node scripts/test-compatibility.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "version": "changeset version"
   },
@@ -148,7 +149,7 @@
     "oxfmt": "^0.58.0",
     "oxlint": "^1.73.0",
     "publint": "^0.3.21",
-    "tsdown": "^0.22.4",
+    "tsdown": "^0.23.0",
     "turbo": "^2.10.4",
     "typescript": "^7.0.2",
     "vitest": "^4.1.10"
@@ -156,15 +157,15 @@
   "peerDependencies": {
     "@commitlint/cli": ">=19 <22",
     "@commitlint/config-conventional": ">=19 <22",
-    "@vitest/coverage-v8": ">=4 <5",
+    "@vitest/coverage-v8": ">=4 <6",
     "lefthook": ">=2 <3",
     "oxfmt": ">=0.20 <1",
     "oxlint": ">=1 <2",
     "publint": ">=0.3 <1",
-    "tsdown": ">=0.15 <1",
+    "tsdown": ">=0.23 <1",
     "turbo": ">=2 <3",
     "typescript": ">=5.7 <8",
-    "vitest": ">=4 <5"
+    "vitest": ">=4 <6"
   },
   "peerDependenciesMeta": {
     "@commitlint/cli": {
